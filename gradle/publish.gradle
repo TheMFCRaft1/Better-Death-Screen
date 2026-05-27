@@ -1,0 +1,74 @@
+apply from: rootProject.file('gradle/env.gradle')
+
+subprojects { sub ->
+    if (sub.name == 'common') {
+        return
+    }
+
+    sub.pluginManager.withPlugin('me.modmuss50.mod-publish-plugin') {
+        sub.afterEvaluate {
+            def loader = sub.name.startsWith('fabric') ? 'fabric' : 'neoforge'
+            def mcVersion = sub.findProperty('minecraft_version') ?: '1.21.1'
+            def modrinthToken = rootProject.env('MODRINTH_TOKEN', '')
+            def curseforgeToken = rootProject.env('CURSEFORGE_TOKEN', '')
+            def curseforgeProjectId = rootProject.env('CURSEFORGE_PROJECT_ID', '')
+
+            sub.publishMods {
+                file = sub.tasks.named('remapJar').flatMap { it.archiveFile }
+                changelog = rootProject.env('CHANGELOG', "Release ${rootProject.mod_version} (${sub.name})")
+                type = rootProject.env('RELEASE_TYPE', 'STABLE')
+                modLoaders.add(loader)
+                displayName = "${rootProject.mod_name} ${rootProject.mod_version} (${loader}, MC ${mcVersion})"
+                version = "${rootProject.mod_version}+${sub.name}"
+
+                if (modrinthToken) {
+                    modrinth {
+                        accessToken = modrinthToken
+                        projectId = rootProject.env('MODRINTH_PROJECT_ID', 'better-death-screen')
+                        minecraftVersions.add(mcVersion)
+                        requires 'architectury-api'
+                        optional 'cloth-config'
+                    }
+                }
+
+                if (curseforgeToken && curseforgeProjectId) {
+                    curseforge {
+                        accessToken = curseforgeToken
+                        projectId = curseforgeProjectId
+                        minecraftVersions.add(mcVersion)
+                        clientRequired = true
+                        serverRequired = false
+                    }
+                }
+            }
+
+            sub.tasks.named('publishMods').configure {
+                group = 'publishing'
+                description = "Upload ${sub.name} to Modrinth/CurseForge (requires PUBLISH_ENABLED=true and API tokens)"
+                onlyIf {
+                    if (!rootProject.publishEnabled()) {
+                        logger.lifecycle("Skipping publish for ${sub.name}: set PUBLISH_ENABLED=true in .env")
+                        return false
+                    }
+                    if (!modrinthToken && !(curseforgeToken && curseforgeProjectId)) {
+                        logger.lifecycle("Skipping publish for ${sub.name}: no MODRINTH_TOKEN or CURSEFORGE_TOKEN+CURSEFORGE_PROJECT_ID")
+                        return false
+                    }
+                    return true
+                }
+            }
+        }
+    }
+}
+
+tasks.register('publishAll') {
+    group = 'publishing'
+    description = 'Build and publish all loader/version JARs (Modrinth + CurseForge when configured)'
+    dependsOn subprojects.findAll { it.name != 'common' }.collect { "${it.path}:publishMods" }
+}
+
+tasks.register('buildAll') {
+    group = 'build'
+    description = 'Build all platform JARs without uploading'
+    dependsOn subprojects.findAll { it.name != 'common' }.collect { "${it.path}:build" }
+}

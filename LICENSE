@@ -1,0 +1,69 @@
+Better Death Screen — Source Available License (BDS-SAL) v1.0
+
+Copyright (c) 2026 TheMFCraft (Phiro Studios). All rights reserved.
+
+This license applies to the software "Better Death Screen" (the "Software"),
+including all source code, resources, binaries, and documentation in this
+repository, unless another file explicitly states otherwise.
+
+1. GRANT OF LIMITED RIGHTS
+
+   You may:
+
+   a) View, read, and study the source code for personal learning and
+      non-commercial evaluation;
+
+   b) Modify the source code solely for your own private, personal use on
+      systems you control;
+
+   c) Build the Software from source for your own private, personal use.
+
+2. RESTRICTIONS — NO REDISTRIBUTION
+
+   You may NOT, without prior written permission from the copyright holder:
+
+   a) Publish, upload, redistribute, sublicense, sell, or otherwise make
+      the Software (or any modified version, derivative work, or build
+      artifact) available to any third party;
+
+   b) Re-publish the Software or derivatives on Modrinth, CurseForge, GitHub
+      Releases, mod platforms, mirrors, file hosts, or similar services;
+
+   c) Include the Software in mod packs, launchers, or collections that are
+      distributed to others, except where you have obtained explicit written
+      permission from the copyright holder;
+
+   d) Remove or alter copyright notices, license text, or attribution.
+
+3. OPEN SOURCE NATURE
+
+   The source code is publicly available for transparency and personal use
+   as described above. Availability of source code does not grant permission
+   to republish or commercially exploit the Software.
+
+4. THIRD-PARTY COMPONENTS
+
+   The Software may depend on third-party libraries and APIs (e.g. Minecraft,
+   Fabric, NeoForge, Architectury) under their respective licenses. Those
+   terms apply to those components in addition to this license.
+
+5. DISCLAIMER
+
+   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+   IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY,
+   FITNESS FOR A PARTICULAR PURPOSE, AND NONINFRINGEMENT. IN NO EVENT SHALL
+   THE COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY.
+
+6. PERMISSION REQUESTS
+
+   For redistribution, mod-pack inclusion, fork publication, or commercial
+   use, contact the copyright holder: TheMFCraft / Phiro Studios.
+
+---
+
+Deutsche Kurzfassung (nicht rechtsverbindlich; im Zweifel gilt der englische Text):
+
+- Quellcode ist einsehbar; private Nutzung und eigene Builds sind erlaubt.
+- Weiterveröffentlichung (Modrinth, CurseForge, Mirrors, Modpacks für andere
+  usw.) ist ohne schriftliche Zustimmung des Rechteinhabers untersagt.
+- Copyright liegt bei TheMFCraft (Phiro Studios).

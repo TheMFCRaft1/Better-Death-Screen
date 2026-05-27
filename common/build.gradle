@@ -1,0 +1,32 @@
+plugins {
+    id 'dev.architectury.loom'
+    id 'architectury-plugin'
+}
+
+architectury {
+    common 'fabric', 'neoforge'
+}
+
+base {
+    archivesName = rootProject.mod_id
+}
+
+loom {
+    silentMojangMappingsLicense()
+}
+
+dependencies {
+    minecraft "net.minecraft:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+}
+
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = 21
+}

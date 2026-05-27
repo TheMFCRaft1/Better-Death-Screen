@@ -1,0 +1,27 @@
+pluginManagement {
+repositories {
+    maven { url = 'https://maven.neoforged.net/releases/' }
+    maven { url = 'https://maven.fabricmc.net/' }
+    maven { url = 'https://maven.architectury.dev/' }
+    mavenCentral()
+    gradlePluginPortal()
+}
+}
+
+plugins {
+    id 'org.gradle.toolchains.foojay-resolver-convention' version '0.8.0'
+}
+
+rootProject.name = 'better-death-screen'
+
+include 'common'
+include 'fabric-1.20.1'
+include 'neoforge-1.20.1'
+include 'fabric-1.21.1'
+include 'neoforge-1.21.1'
+include 'fabric-1.21.8'
+include 'neoforge-1.21.8'
+include 'fabric-1.21.11'
+include 'neoforge-1.21.11'
+include 'fabric-26.1'
+include 'neoforge-26.1'

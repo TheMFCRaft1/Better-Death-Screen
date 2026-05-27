@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "id": "${mod_id}",
+  "version": "${version}",
+  "name": "${mod_name}",
+  "description": "Replaces the vanilla death screen with detailed death info, coordinates, and lost inventory.",
+  "authors": ["${author}"],
+  "license": "BDS-SAL-1.0",
+  "icon": "assets/better_death_screen/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "com.phiro.betterdeathscreen.fabric.BetterDeathScreenFabric"
+    ]
+  },
+  "mixins": [
+    "better_death_screen.fabric.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.15.0",
+    "minecraft": "${minecraft_version}",
+    "architectury": "*"
+  },
+  "suggests": {
+    "cloth-config": "*"
+  }
+}

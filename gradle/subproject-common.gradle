@@ -1,0 +1,49 @@
+rootProject.ext.minecraft_version = project.minecraft_version
+
+base {
+    archivesName = "${rootProject.findProperty('mod_id')}-${project.name}"
+}
+
+dependencies {
+    minecraft "net.minecraft:minecraft:${project.minecraft_version}"
+}
+
+loom {
+    silentMojangMappingsLicense()
+}
+
+if (project.hasProperty('yarn_mappings')) {
+    dependencies {
+        mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    }
+} else {
+    dependencies {
+        mappings loom.officialMojangMappings()
+    }
+}
+
+def javaVersion = (project.findProperty('java_version') ?: '21') as int
+
+java {
+    withSourcesJar()
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(javaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.release = javaVersion
+}
+
+tasks.processResources {
+    inputs.property 'version', rootProject.mod_version
+    filesMatching(['fabric.mod.json', 'META-INF/neoforge.mods.toml', 'META-INF/mods.toml']) {
+        expand([
+                version          : rootProject.mod_version,
+                mod_id           : rootProject.mod_id,
+                mod_name         : rootProject.mod_name,
+                author           : rootProject.author,
+                minecraft_version: project.minecraft_version
+        ])
+    }
+}

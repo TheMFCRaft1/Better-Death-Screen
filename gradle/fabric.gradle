@@ -1,0 +1,45 @@
+def modId = rootProject.findProperty('mod_id') ?: 'better_death_screen'
+
+architectury {
+    platformSetupLoomIde()
+    fabric()
+}
+
+configurations {
+    common
+    shadowCommon
+    compileClasspath.extendsFrom common
+    runtimeClasspath.extendsFrom common
+}
+
+def unobfuscated = project.findProperty('unobfuscated') == 'true'
+
+dependencies {
+    if (unobfuscated) {
+        implementation "net.fabricmc:fabric-loader:${project.loader_version}"
+        implementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+        implementation "dev.architectury:architectury-fabric:${project.architectury_version}"
+        common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+        shadowCommon(project(path: ':common', configuration: 'transformProductionFabric')) { transitive false }
+    } else {
+        modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+        modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+        modImplementation "dev.architectury:architectury-fabric:${project.architectury_version}"
+        common(project(path: ':common', configuration: 'namedElements')) { transitive false }
+        shadowCommon(project(path: ':common', configuration: 'transformProductionFabric')) { transitive false }
+    }
+}
+
+loom {
+    mods {
+        "${modId}" {
+            sourceSet sourceSets.main
+        }
+    }
+}
+
+if (!unobfuscated) {
+    tasks.remapJar {
+        injectAccessWidener = false
+    }
+}

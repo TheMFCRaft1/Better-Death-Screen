@@ -1,0 +1,41 @@
+modLoader = "neoforge"
+loaderVersion = "[1,)"
+license = "BDS-SAL-1.0"
+
+[[mixins]]
+config = "better_death_screen.neoforge.mixins.json"
+
+[[mods]]
+modId = "${mod_id}"
+version = "${version}"
+displayName = "${mod_name}"
+authors = "${author}"
+description = "Replaces the vanilla death screen with detailed death info, coordinates, and lost inventory."
+
+[[dependencies.${mod_id}]]
+modId = "neoforge"
+type = "required"
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${mod_id}]]
+modId = "minecraft"
+type = "required"
+versionRange = "[${minecraft_version},)"
+ordering = "NONE"
+side = "CLIENT"
+
+[[dependencies.${mod_id}]]
+modId = "architectury"
+type = "required"
+versionRange = "[1,)"
+ordering = "AFTER"
+side = "CLIENT"
+
+[[dependencies.${mod_id}]]
+modId = "cloth-config"
+type = "optional"
+versionRange = "[1,)"
+ordering = "NONE"
+side = "CLIENT"
