@@ -1,5 +1,5 @@
 plugins {
-    id 'dev.architectury.loom' version '1.9-SNAPSHOT' apply false
+    id 'dev.architectury.loom' version '1.14.473' apply false
     id 'architectury-plugin' version '3.4-SNAPSHOT' apply false
     id 'me.modmuss50.mod-publish-plugin' version '2.0.0-beta.1' apply false
 }
